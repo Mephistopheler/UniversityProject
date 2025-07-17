@@ -29,42 +29,38 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <div>
             <form
                 onSubmit={handleLogin}
-                className="bg-white p-6 rounded shadow-md w-full max-w-sm"
             >
-                <h2 className="text-2xl font-semibold mb-4 text-center">Вход в систему</h2>
+                <h2>Вход в систему</h2>
 
                 {error && (
-                    <div className="text-red-600 text-sm mb-4">{error}</div>
+                    <div>{error}</div>
                 )}
 
-                <label className="block mb-2 text-sm font-medium text-gray-700">
+                <label>
                     Email:
                     <input
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
-                        className="w-full mt-1 p-2 border rounded"
                     />
                 </label>
 
-                <label className="block mb-4 text-sm font-medium text-gray-700">
+                <label>
                     Пароль:
                     <input
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
-                        className="w-full mt-1 p-2 border rounded"
                     />
                 </label>
 
                 <button
                     type="submit"
-                    className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded"
                 >
                     Войти
                 </button>
