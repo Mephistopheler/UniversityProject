@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-// Предопределённые пользователи
+
 const USERS = {
     "student@example.com": { password: "1234", role: "student" },
     "teacher@example.com": { password: "1234", role: "teacher" },
