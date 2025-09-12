@@ -1,6 +1,8 @@
 
 import { useNavigate } from "react-router-dom";
 
+import "../styles/LogoutButton.css";
+
 function LogoutButton() {
     const navigate = useNavigate();
 
@@ -12,7 +14,7 @@ function LogoutButton() {
     };
 
     return (
-        <button onClick={handleLogout}>
+        <button onClick={handleLogout} className={"logoutButton"}>
             Выйти
         </button>
     );

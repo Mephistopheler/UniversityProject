@@ -1,19 +1,22 @@
 import { Outlet, Link } from 'react-router-dom';
 
 import LogoutButton from "./LogoutButton.jsx";
+import "../styles/StudentLayout.css";
 
 function StudentLayout() {
     return (
-        <div>
+        <div className="student-layout">
             <header>
-                <h2>Панель студента</h2>
+                <div className="header-left">
+                    <h2>Панель студента</h2>
+                    <nav>
+                        <ul>
+                            <li><Link to="/student/dashboard">Главная</Link></li>
+                            <li><Link to="/student/courses">Мои курсы</Link></li>
+                        </ul>
+                    </nav>
+                </div>
                 <LogoutButton />
-                <nav>
-                    <ul>
-                        <li><Link to="/student/dashboard">Главная</Link></li>
-                        <li><Link to="/student/courses">Мои курсы</Link></li>
-                    </ul>
-                </nav>
             </header>
 
             <main>

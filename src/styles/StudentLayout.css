@@ -1,0 +1,60 @@
+
+.student-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* чтобы занять всю высоту экрана */
+}
+
+
+.student-layout header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to bottom right, #e1edec, #85cbdd);
+    border-bottom: 1px solid #ddd;
+    padding: 1rem;
+    z-index: 1000;
+
+    display: flex;               /* превращаем header в flex-контейнер */
+    justify-content: space-between; /* элементы разъезжаются по краям */
+    align-items: center;         /* выравнивание по вертикали */
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* отступ между заголовком и меню */
+}
+
+
+/* Контент с отступом, чтобы не перекрывался шапкой */
+.student-layout main {
+    flex: 1;
+    margin-top: 80px; /* примерно высота header */
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+.header-left nav ul {
+    display: flex;           /* горизонтальное расположение элементов */
+    gap: 20px;               /* расстояние между пунктами */
+    list-style: none;        /* убираем стандартные маркеры */
+    margin: 0;               /* убираем стандартный margin */
+    padding: 0;              /* убираем стандартный padding */
+}
+
+.header-left nav ul li a {
+    text-decoration: none;   /* убираем подчеркивание ссылок */
+    color: #333;             /* цвет текста */
+    font-weight: 500;
+    padding: 6px 12px;       /* внутренние отступы */
+    border-radius: 4px;      /* скругление при hover */
+    transition: background 0.2s;
+}
+
+.header-left nav ul li a:hover {
+    background-color: #e0e0e0; /* подсветка при наведении */
+    color: #000;
+}
+

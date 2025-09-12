@@ -64,7 +64,7 @@ export default function CourseDetail() {
             )}
 
             <h3>Задания и оценки:</h3>
-            <ul>
+            <ul id="taskList">
                 {(course.tasks || []).map(task => (
                     <TaskItem
                         key={task.id}
