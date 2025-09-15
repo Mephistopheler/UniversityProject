@@ -69,30 +69,44 @@ const defaultCourses = [
 const loadCourses = () => {
     try {
         const stored = localStorage.getItem("courses");
-        if (stored) {
-            const parsed = JSON.parse(stored);
-            return parsed.map(course => ({
-                ...course,
-                tasks: course.tasks.map(task => ({
-                    ...task,
-                    canSubmit: !!task.canSubmit,
-                })),
-            }));
-        }
-    } catch (e) {
-        console.warn("Ошибка при загрузке курсов из localStorage:", e);
-    }
+        let courses = stored ? JSON.parse(stored) : defaultCourses;
 
-    return defaultCourses;
+        // 🎯 фильтрация курсов по пользователю
+        const currentUser = JSON.parse(localStorage.getItem("currentUser") || "null");
+
+        if (currentUser?.role === "student" && currentUser.courses) {
+            courses = courses.filter(course => currentUser.courses.includes(course.id));
+        }
+
+        return courses;
+    } catch (e) {
+        console.warn("Ошибка при загрузке курсов:", e);
+        return defaultCourses;
+    }
 };
 
-export const CoursesProvider = ({ children }) => {
-    const [courses, setCourses] = useState(loadCourses);
 
+
+export const CoursesProvider = ({ children }) => {
+    const [courses, setCourses] = useState([]);
 
     useEffect(() => {
-        localStorage.setItem("courses", JSON.stringify(courses));
-    }, [courses]);
+        const storedUser = localStorage.getItem("currentUser");
+        if (storedUser) {
+            const user = JSON.parse(storedUser);
+            if (user.role === "student") {
+                // показываем только курсы студента
+                setCourses(defaultCourses.filter(c => user.courses.includes(c.id)));
+            } else if (user.role === "teacher") {
+                // учитель видит все курсы
+                setCourses(defaultCourses);
+            } else {
+                setCourses(defaultCourses);
+            }
+        } else {
+            setCourses([]);
+        }
+    }, []);
 
     return (
         <CoursesContext.Provider value={{ courses, setCourses }}>

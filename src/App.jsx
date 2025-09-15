@@ -11,6 +11,9 @@ import NotFoundPage from "./pages/NotFoundPage";
 import StudentCourses from "./pages/StudentCourses.jsx";
 import CourseDetail from "./pages/CourseDetail";
 import StudentLayout from "./components/StudentLayout.jsx";
+import TeacherCourses from "./pages/TeacherCourses.jsx";
+import TeacherLayout from "./components/TeacherLayout.jsx";
+import TeacherCourseDetail from "./pages/TeacherCourseDetail.jsx";
 
 function App() {
     return (
@@ -30,7 +33,11 @@ function App() {
 
                 {/* Преподаватель */}
                 <Route element={<PrivateRoute allowedRoles={["teacher"]} />}>
-                    <Route path="/teacher/dashboard" element={<TeacherDashboard />} />
+                   <Route path="/teacher" element={<TeacherLayout />}>
+                    <Route path="dashboard" element={<TeacherDashboard />} />
+                    <Route path="courses" element={<TeacherCourses />} />
+                    <Route path="courses/:id" element={<TeacherCourseDetail />} />
+                   </Route>
                 </Route>
 
                 {/* Админ */}

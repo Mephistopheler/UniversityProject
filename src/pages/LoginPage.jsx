@@ -3,10 +3,37 @@ import { useNavigate } from "react-router-dom";
 
 
 const USERS = {
-    "student@example.com": { password: "1234", role: "student" },
-    "teacher@example.com": { password: "1234", role: "teacher" },
-    "admin@example.com": { password: "1234", role: "admin" },
+    "student2@example.com": {
+        password: "1234",
+        role: "student",
+        courses: ["course1", "course2"]
+    },
+    "student@example.com": {
+        password: "1234",
+        role: "student",
+        courses: ["course1"]
+    },
+    "student0@example.com": {
+        password: "1234",
+        role: "student",
+        courses: []
+    },
+    "teacher2@example.com": {
+        password: "1234",
+        role: "teacher",
+        courses: ["course1", "course2"]
+    },
+    "teacher@example.com": {
+        password: "1234",
+        role: "teacher",
+        courses: ["course2"]
+    },
+    "admin@example.com": {
+        password: "1234",
+        role: "admin"
+    },
 };
+
 
 export default function LoginPage() {
     const [email, setEmail] = useState("");
@@ -30,7 +57,7 @@ export default function LoginPage() {
         }
     };
 
-    const handleLogin = async (e) => {
+    const handleLogin = (e) => {
         e.preventDefault();
 
         const user = USERS[email];
@@ -38,11 +65,19 @@ export default function LoginPage() {
         if (user && user.password === password) {
             localStorage.setItem("token", "fake-token");
             localStorage.setItem("role", user.role);
+            // сохраняем ВСЮ инфу о пользователе
+            localStorage.setItem("currentUser", JSON.stringify({
+                email,
+                role: user.role,
+                courses: user.courses || []
+            }));
             redirectToDashboard(user.role);
         } else {
             setError("Неверный логин или пароль");
         }
     };
+
+
 
     return (
         <div>
